@@ -49,6 +49,16 @@ gulp.task('jsmin', function() {
     })
     //默认任务
 gulp.task('default', function() {
-    return gulp.watch('webserver', 'jsmin', 'cssmin', 'sass')
+        return gulp.watch('webserver', 'jsmin', 'cssmin', 'sass')
 
+    })
+    //创建bulidcss
+gulp.task('bulidcss', function() {
+        return gulp.src('./src/css/*.css')
+            .pipe(gulp.dest('./src/dist/css'))
+    })
+    ////创建bulidjs
+gulp.task('bulidjs', function() {
+    return gulp.src('./src/js/*.js')
+        .pipe(gulp.dest('./src/dist/js'))
 })
