@@ -44,21 +44,26 @@ gulp.task('cssmin', function() {
 gulp.task('jsmin', function() {
         return gulp.src('./src/js/*.js')
             .pipe(uglify())
+            .pipe(concat('all.css'))
             .pipe(concat('all.js'))
             .pipe(gulp.dest('./src/build/js'))
     })
     //默认任务
-gulp.task('default', function() {
-        return gulp.watch('webserver', 'jsmin', 'cssmin', 'sass')
+    // gulp.task('default', function() {
+    //         return gulp.watch('webserver', 'jsmin', 'cssmin', 'sass')
 
-    })
+//     })
+//默认任务
+gulp.task('default', gulp.series('jsmin', 'cssmin', 'sass', 'webserver', 'watch'))
     //创建bulidcss
-gulp.task('bulidcss', function() {
-        return gulp.src('./src/css/*.css')
-            .pipe(gulp.dest('./src/dist/css'))
-    })
-    ////创建bulidjs
-gulp.task('bulidjs', function() {
-    return gulp.src('./src/js/*.js')
-        .pipe(gulp.dest('./src/dist/js'))
-})
+    // gulp.task('bulidcss', function() {
+    //         return gulp.src('./src/css/*.css')
+    //             .pipe(gulp.dest('./src/dist/css'))
+    //     })
+    //     ////创建bulidjs
+    // gulp.task('bulidjs', function() {
+    //     return gulp.src('./src/js/*.js')
+    //         .pipe(gulp.dest('./src/dist/js'))
+    // })
+    //创建bulid
+gulp.task('bulid', gulp.series('jsmin', 'cssmin'))
